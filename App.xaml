@@ -1,0 +1,55 @@
+﻿<Application x:Class="MonsterEnergyCollectionApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MonsterEnergyCollectionApp"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- 1. Стиль для ползунка (Thumb) -->
+        <Style x:Key="DarkScrollThumb" TargetType="Thumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Grid>
+                            <!-- Цвет самого ползунка (в обычном состоянии и при наведении) -->
+                            <Border x:Name="ThumbBorder" 
+                                Background="#4E4E4E" 
+                                CornerRadius="4" 
+                                Margin="2"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <!-- Анимация цвета при наведении мыши -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ThumbBorder" Property="Background" Value="#6E6E6E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 2. Основной стиль для всех ScrollBar в приложении -->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="#1E1E1E"/>
+            <!-- Фон дорожки скролла -->
+            <Setter Property="Width" Value="10"/>
+            <!-- Ширина вертикального скроллбара -->
+            <Setter Property="Height" Value="10"/>
+            <!-- Высота горизонтального скроллбара -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid x:Name="Bg" Background="{TemplateBinding Background}">
+                            <!-- Трек, по которому двигается ползунок (кнопки-стрелочки скрыты для минимализма) -->
+                            <Track x:Name="PART_Track" IsDirectionReversed="True" IsEnabled="{TemplateBinding IsEnabled}">
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource DarkScrollThumb}" />
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+
+</Application>
